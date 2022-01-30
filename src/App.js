@@ -1,21 +1,22 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NoPage from "./pages/NoPage";
+import Blog from "./pages/Blog/Blog";
+import BlogId from "./pages/Blog/BlogId";
 
-function App({ ...props }) {
-    const data = `function onLoad(editor) {
-  console.log("I've loaded!");
-  }`;
-
+export default function App() {
     return (
-
-        <Router>
-            <h1 id="h1">Frontend: ReactJs</h1>
-            <h1 id="h1">Backend: Django</h1>
-            <h4>Setup By: rockvns</h4>
-        </Router>
-
-
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />}/>
+                    <Route path="blog" element={<Blog />}>
+                        <Route path=":blogid" element={<BlogId/>}/>
+                    </Route>
+                    <Route path="*" element={<NoPage />}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
-
-export default App;
